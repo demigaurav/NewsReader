@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView image;
     String res;
     TextView title;
+    TextView country;
     TextView descrip;
     JSONArray array;
     Button prevButton;
@@ -89,9 +90,16 @@ public class MainActivity extends AppCompatActivity {
         return  url;
     }
 
+    public String getCountry(JSONArray array,int i){
+        JSONObject article=array.optJSONObject(i);
+        String coun=article.optString("country");
+        return  coun;
+    }
+
     public void Update(int i){
         title.setText(getTitle(array,i));
         descrip.setText(getDesc(array,i));
+        country.setText(getCountry(array,i));
         String imgurl=getImage(array,i);
         ImageDown ima= new ImageDown();
         Bitmap imgDownld=null;
@@ -184,25 +192,13 @@ public class MainActivity extends AppCompatActivity {
 
         lim=array.length();
         title=findViewById(R.id.textView10);
+        country=findViewById(R.id.textView);
         descrip=findViewById(R.id.textView11);
         image=findViewById(R.id.imageView);
         prevButton=findViewById(R.id.button);
         nextButton=findViewById(R.id.button2);
         prevButton.setEnabled(false);
-        String tit=getTitle(array,0);
-        title.setText(tit);
-        descrip.setText(getDesc(array,0));
-        ImageDown ima= new ImageDown();
-        Bitmap imgDownld=null;
-        String imgurl=getImage(array,0);
-        try {
-            imgDownld=ima.execute(imgurl).get();
-            image.setImageBitmap(imgDownld);
-        }
-        catch (Exception e){
-            Log.i("Error","Failed");
-            e.printStackTrace();
-        }
+        Update(0);
 
 
 
