@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,8 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
     public String getCountry(JSONArray array,int i){
         JSONObject article=array.optJSONObject(i);
-        String coun=article.optString("country");
-        return  coun;
+        JSONArray coun;
+        coun=article.optJSONArray("country");
+        String country=coun.optString(0);
+
+
+
+        return  country.toUpperCase(Locale.ROOT);
     }
 
     public void Update(int i){
