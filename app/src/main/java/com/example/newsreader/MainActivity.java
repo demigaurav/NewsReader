@@ -94,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
         JSONArray coun;
         coun=article.optJSONArray("country");
         String country=coun.optString(0);
-
-
-
         return  country.toUpperCase(Locale.ROOT);
     }
 
